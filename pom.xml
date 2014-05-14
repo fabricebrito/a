@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.terradue</groupId>
+		<artifactId>t2-parent</artifactId>
+		<version>11</version>
+	</parent>
+
+	<groupId>com.terradue.ciop.app</groupId>
+	<artifactId>beam-java-app</artifactId>
+	<packaging>rpm</packaging>
+	<description>BEAM Java FLH Processing</description>
+	<version>0.1-SNAPSHOT</version>
+
+	<scm>
+		<connection>scm:git:git@github.com:Terradue/BEAM-Java-tutorial.git</connection>
+		<developerConnection>scm:git:git@github.com:Terradue/BEAM-Java-tutorial.git</developerConnection>
+		<url>https://github.com/Terradue/BEAM-Java-tutorial</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.esa.beam</groupId>
+			<artifactId>beam-gpf</artifactId>
+			<version>5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.esa.beam</groupId>
+			<artifactId>beam-visat</artifactId>
+			<version>5.0</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>bc-mvn</id>
+			<name>Public Maven Repository at Brockmann Consult</name>
+			<url>http://www.brockmann-consult.de/mvn/os</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</repository>
+		<repository>
+			<id>maven-repository.unidata.ucar.edu</id>
+			<name>Unidata Repository</name>
+			<url>http://artifacts.unidata.ucar.edu/content/repositories/unidata-releases</url>
+		</repository>
+		<repository>
+			<id>osgeo</id>
+			<name>Open Source Geospatial Foundation Repository</name>
+			<url>http://download.osgeo.org/webdav/geotools/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>/application</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<debug>true</debug>
+					<encoding>UTF-8</encoding>
+					<excludes>
+						<exclude>.gitignore</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeTypes>jar</includeTypes>
+							<outputDirectory>${project.build.directory}/dependency/jars/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>/application</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-jars</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>/application/shared/lib</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/dependency/jars</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>jar</goal>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<copyright>${project.inceptionYear}, Terradue, GPL</copyright>
+					<distribution>Terradue ${project.inceptionYear}</distribution>
+					<group>air</group>
+					<packager>Terradue</packager>
+					<summary>ESA BEAM Toolbox band arithmetic for algal bloom detection</summary>
+					<description>This tutorial uses the ESA BEAM Toolbox to perform
+						Envisat MERIS Level 1 band arithmetic calculation to detect algal
+						blooms. The tutorial includes two MERIS Level 1 reduced resolution
+						products and two processing steps: expression taking each MERIS
+						product and applying the mathematical expression and binning that
+						bins the products and generates the outputs in several formats
+						(e.g. GEOTIFF, PNG and JPEG)</description>
+					<name>${project.artifactId}</name>
+					<defaultDirmode>775</defaultDirmode>
+					<defaultFilemode>664</defaultFilemode>
+					<defaultUsername>root</defaultUsername>
+					<defaultGroupname>ciop</defaultGroupname>
+					<prefix>/application</prefix>
+					<autoRequires>true</autoRequires>
+					<mappings>
+						<mapping>
+							<directory>/application</directory>
+							<sources>
+								<source>
+									<location>${basedir}/src/main/resources</location>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/application/shared/lib</directory>
+							<sources>
+								<source>
+									<location>${project.build.directory}/${project.artifactId}-${project.version}.jar</location>
+								</source>
+								<source>
+									<location>${project.build.directory}/dependency/jars</location>
+								</source>
+							</sources>
+						</mapping>
+						<mapping>
+							<directory>/application</directory>
+							<sources>
+								<source>
+									<location>${basedir}/src/main/resources</location>
+									<includes>
+										<include>**/run</include>
+										<include>**/run.R</include>
+										<include>**/bin/*</include>
+										<include>**/*.sh</include>
+										<include>**/libexec/*</include>
+									</includes>
+								</source>
+							</sources>
+							<filemode>775</filemode>
+						</mapping>
+					</mappings>
+
+					<provides>
+						<provide>${project.artifactId}</provide>
+					</provides>
+					<needarch>noarch</needarch>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>com.terradue</groupId>
+				<artifactId>rpmdeploy-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>de.jutzig</groupId>
+				<artifactId>github-release-plugin</artifactId>
+				<version>1.0.3</version>
+				<executions>
+					<execution>
+						<id>github-upload</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>release</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<releaseName>v${project.version}</releaseName>
+							<tag>v${project.version}</tag>
+							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${DYNAMIC.CBUILDPROP.RPM.VERSION}-${DYNAMIC.CBUILDPROP.RPM.RELEASE}.${DYNAMIC.CBUILDPROP.OS}.noarch.rpm</artifact>
+							<overwriteArtifact>true</overwriteArtifact>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
+

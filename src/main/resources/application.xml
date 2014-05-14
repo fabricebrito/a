@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" id="${artifactId}">
+	<jobTemplates>
+		<jobTemplate id="flh-proc">
+			<streamingExecutable>/application/flh-proc/run</streamingExecutable>
+			<defaultParameters>
+				<parameter scope="runtime" title="Start date" abstract="Start date of the TOI"
+					type="opensearch" target="time:start" id="startdate" />
+				<parameter scope="runtime" title="Stop date" abstract="Stop date of the TOI"
+					type="opensearch" target="time:end" id="enddate" />
+				<parameter type="opensearch" target="geo:box" id="bbox" />
+				<parameter id="algorithm">Minimum/Maximum</parameter>
+			</defaultParameters>
+			<defaultJobconf>
+				<property id="mapred.task.timeout">9900000000000</property>
+			</defaultJobconf>
+		</jobTemplate>
+	</jobTemplates>
+	<workflow id="test_wf" title="Test Workflow"
+		abstract="This is a process workflow">
+		<workflowVersion>1.0</workflowVersion>
+		<node id="node_sample">
+			<job id="samplejob" />
+			<sources>
+				<source refid="cas:series">http://catalogue.terradue.int/catalogue/search/MER_RR__1P/description</source>
+			</sources>
+			<parameters>
+				<parameter type="opensearch" target="time:start" id="startdate">2012-04-02</parameter>
+				<parameter type="opensearch" target="time:end" id="enddate">2012-04-06</parameter>
+			</parameters>
+		</node>
+	</workflow>
+</application>
