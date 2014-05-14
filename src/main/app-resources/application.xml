@@ -10,18 +10,17 @@
 				<parameter scope="runtime" title="Stop date" abstract="Stop date of the TOI"
 					type="opensearch" target="time:end" id="enddate" />
 				<parameter type="opensearch" target="geo:box" id="bbox" />
-				<parameter id="algorithm">Minimum/Maximum</parameter>
 			</defaultParameters>
 			<defaultJobconf>
 				<property id="mapred.task.timeout">9900000000000</property>
 			</defaultJobconf>
 		</jobTemplate>
 	</jobTemplates>
-	<workflow id="test_wf" title="Test Workflow"
-		abstract="This is a process workflow">
+	<workflow id="flh-wf" title="FLH Workflow"
+		abstract="This is a process workflow that computes MERIS Level 1 product with the Fluorescence Line Height Operator for BEAM toolbox">
 		<workflowVersion>1.0</workflowVersion>
-		<node id="node_sample">
-			<job id="samplejob" />
+		<node id="node_flh">
+			<job id="flh-proc" />
 			<sources>
 				<source refid="cas:series">http://catalogue.terradue.int/catalogue/search/MER_RR__1P/description</source>
 			</sources>

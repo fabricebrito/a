@@ -68,13 +68,12 @@ do
 	# report activity in the log
 	ciop-log "INFO" "Retrieved `basename $retrieved`, moving on to expression"
 
-	# invoke the application beam_expr.sh with:
+	# invoke the application gpt.sh with:
 	# - the outputdir location defined above
-	# - the expression retrieved with ciop-getparam
-	# - the band
-	# - the MERIS local path (copied from the archive with ciop-copy
-	# the script beam_expr.sh applies the arithmetric expression to the input product, compress the result (.tgz) and will write it to the $OUTPUTDIR 
-	$_CIOP_APPLICATION_PATH/expression/bin/beam_expr.sh -o $OUTPUTDIR -e "$expression" -b out $retrieved 1>&2 
+	# - the operator FLH
+	# - the MERIS local path (copied from the archive with ciop-copy)
+	# the script gpt.sh applies the operator to the input product, compress the result (.tgz) and will write it to the $OUTPUTDIR 
+	$_CIOP_APPLICATION_PATH/shared/bin/gpt.sh -o $OUTPUTDIR -e "$expression" -b out $retrieved 1>&2 
 
 	# check the exit code
 	[ "$?" != "0" ] && exit $ERR_BEAM 

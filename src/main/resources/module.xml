@@ -1,0 +1,33 @@
+<module>
+
+    <manifestVersion>1.0.0</manifestVersion>
+    <symbolicName>flh</symbolicName>
+    <version>1.0</version>
+    <name>FLH</name>
+    <description>FLH Operator developed during the MERIS/AATSR Workshop, Esrin, Oct 2012</description>
+
+    <dependency>
+        <module>beam-gpf</module>
+    </dependency>
+    <dependency>
+        <module>beam-envisat-reader</module>
+    </dependency>
+    <dependency>
+        <module>beam-visat</module>
+        <optional>true</optional>
+    </dependency>
+    
+    <extension point="beam-ui:actions">
+        <action>
+            <id>tutorial-ex3-flh</id>
+            <class>org.esa.beam.visat.actions.DefaultOperatorAction</class>
+            <operatorName>FLH</operatorName>
+            <dialogTitle>FLH (Tutorial Ex3)</dialogTitle>
+            <targetProductNameSuffix>FLH</targetProductNameSuffix>
+            <text>FLH (Tutorial Ex3)...</text>
+            <shortDescr>FLH Operator developed during the MERIS/AATSR Workshop, Esrin, Oct 2012</shortDescr>
+            <parent>tools</parent>
+        </action>
+    </extension>
+
+</module>
