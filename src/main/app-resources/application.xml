@@ -16,7 +16,7 @@
 		</jobTemplate>
 	</jobTemplates>
 	<workflow id="flh-wf" title="FLH Workflow"
-		abstract="This is a process workflow that computes MERIS Level 1 product with the Fluorescence Line Height Operator for BEAM toolbox (base on BEAM tutorial)">
+		abstract="This is a process workflow that computes MERIS Level 1 product with the Fluorescence Line Height Operator for BEAM toolbox (based on BEAM tutorial)">
 		<workflowVersion>1.0</workflowVersion>
 		<node id="node_flh">
 			<job id="flh-proc" />

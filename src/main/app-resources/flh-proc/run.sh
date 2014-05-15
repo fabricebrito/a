@@ -5,8 +5,7 @@ source ${ciop_job_include}
 
 # define the exit codes
 SUCCESS=0
-ERR_BEAM=2
-ERR_NOEXPR=3
+ERR_BEAM=10
 
 # add a trap to exit gracefully
 function cleanExit ()
@@ -15,7 +14,7 @@ function cleanExit ()
    local msg=""
    case "$retval" in
      $SUCCESS)      msg="Processing successfully concluded";;
-     $ERR_BEAM)    msg="gpt failed to process product `basename $product`";;
+     $ERR_BEAM)    msg="gpt failed to process product `basename $retrieved`";;
 	*)             msg="Unknown error";;
    esac
    [ "$retval" != "0" ] && ciop-log "ERROR" "Error $retval - $msg, processing aborted" || ciop-log "INFO" "$msg"
@@ -42,7 +41,7 @@ do
 	[ "$?" == "0" -a -e "$retrieved" ] || exit $ERR_NOINPUT
 	
 	# report activity in the log
-	ciop-log "INFO" "Retrieved `basename $retrieved`, moving on to expression"
+	ciop-log "INFO" "Retrieved `basename $retrieved`, moving on to FLH operator processing"
 
 	mkdir -p $OUTPUTDIR/`basename $retrieved`
 
@@ -51,7 +50,7 @@ do
 	# - the operator FLH
 	# - the MERIS local path (copied from the archive with ciop-copy)
 	# the script gpt.sh applies the operator to the input product, compress the result (.tgz) and will write it to the $OUTPUTDIR 
-	$_CIOP_APPLICATION_PATH/shared/bin/gpt.sh FLH -SsourceProduct=$retrieved -t $OUTPUTDIR/`basename $retrieved`/result.dim 1>&2 
+	$_CIOP_APPLICATION_PATH/shared/bin/gpt.sh FLH -SsourceProduct=$retrieved -f GeoTIFF  -t $OUTPUTDIR/`basename $retrieved`/result.dim 1>&2 
 
 	# check the exit code
 	[ "$?" != "0" ] && exit $ERR_BEAM 
