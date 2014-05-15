@@ -4,7 +4,7 @@
     <symbolicName>flh</symbolicName>
     <version>1.0</version>
     <name>FLH</name>
-    <description>FLH Operator developed during the MERIS/AATSR Workshop, Esrin, Oct 2012</description>
+    <description>FLH Operator (based on tutorial held during the MERIS/AATSR Workshop, Esrin, Oct 2012</description>
 
     <dependency>
         <module>beam-gpf</module>
@@ -22,10 +22,10 @@
             <id>tutorial-ex3-flh</id>
             <class>org.esa.beam.visat.actions.DefaultOperatorAction</class>
             <operatorName>FLH</operatorName>
-            <dialogTitle>FLH (Tutorial Ex3)</dialogTitle>
+            <dialogTitle>FLH</dialogTitle>
             <targetProductNameSuffix>FLH</targetProductNameSuffix>
-            <text>FLH (Tutorial Ex3)...</text>
-            <shortDescr>FLH Operator developed during the MERIS/AATSR Workshop, Esrin, Oct 2012</shortDescr>
+            <text>FLH</text>
+            <shortDescr>FLH Operator</shortDescr>
             <parent>tools</parent>
         </action>
     </extension>
