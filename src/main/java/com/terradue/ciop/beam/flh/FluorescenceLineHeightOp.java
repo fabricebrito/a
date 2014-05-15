@@ -17,7 +17,7 @@ import java.util.Map;
 
 @OperatorMetadata(
         alias = "FLH",
-        description = "FLH Operator developed during the MERIS/AATSR Workshop, Esrin, Oct 2012")
+        description = "FLH Operator (based on tutorial held during the MERIS/AATSR Workshop, Esrin, Oct 2012")
 public class FluorescenceLineHeightOp extends Operator {
 
     @SourceProduct

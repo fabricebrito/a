@@ -15,8 +15,7 @@ function cleanExit ()
    local msg=""
    case "$retval" in
      $SUCCESS)      msg="Processing successfully concluded";;
-     $ERR_BEAM)    msg="Beam_expr failed to process product `basename $product`";;
-     	$ERR_NOEXPR)	msg="No expression provided";;
+     $ERR_BEAM)    msg="gpt failed to process product `basename $product`";;
 	*)             msg="Unknown error";;
    esac
    [ "$retval" != "0" ] && ciop-log "ERROR" "Error $retval - $msg, processing aborted" || ciop-log "INFO" "$msg"
@@ -25,33 +24,10 @@ function cleanExit ()
 trap cleanExit EXIT
 
 # create the output folder to store the output products and export it
-mkdir -p $TMPDIR/output
 export OUTPUTDIR=$TMPDIR/output
-
-# retrieve the arithmetic expression from the application descriptor file
-# its default value is defined in the expression job template. This default value can be overidden in the expression node section of the workflow definition
-# ciop-getparam will take the default value if the workflow does not define it
-#expression="`ciop-getparam expression`"
-
-# log the value, it helps debugging. 
-# the log entry is available in the process stderr 
-#ciop-log "DEBUG" "The expression used is: $expression"
-
-# run a check on the expression value, it can't be empty
-#[ -z "$expression" ] && exit $ERR_NOEXPR
-
-# to retrieve data from ESA G-POD
-export X509_USER_PROXY=/application/fbrito-key.pem
-export X509_CERT_DIR=/application
+mkdir -p $OUTPUTDIR 
 
 # loop and process all MERIS products
-# the expression node definition defines the source of products as a catalogue series
-# a query to the catalogue is done through its OpenSearch interface using two parameters: starttime and endtime 
-# the result will be the URL entries (in RDF format) to all MERIS Level 1 Reduced Resolution (MER_RR__1P) whose acquisition times are inside the interval defined by start/end times
-# the query can be run on the shell with the opensearch-client utility:
-# opensearch-client -p time:start=2012-04-02 -p time:end=2012-04-06 http://localhost/catalogue/sandbox/MER_RR__1P/description
-# an example of such URL is http://localhost/catalogue/sandbox/MER_RR__1P/MER_RR__1PRLRA20120406_102429_000026213113_00238_52838_0211.N1/rdf
-
 while read inputfile 
 do
 	# report activity in log
@@ -86,7 +62,7 @@ do
 	ciop-publish $OUTPUTDIR/`basename $retrieved`
 	
 	# cleanup. Free the local directory space by deleting the input MERIS Level 1 product (copied with ciop-copy) and 
-	# the result of the beam_expr.sh execution (the compressed archive in $OUTPUTDIR)
+	# the result of the gpt FLH operator execution (the compressed archive in $OUTPUTDIR)
 	rm -fr $retrieved $OUTPUTDIR/`basename $retrieved`
 
 done
