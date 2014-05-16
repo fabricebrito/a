@@ -80,6 +80,14 @@
 		</repository>
 
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots />
+			<id>repository.terradue.com</id>
+			<name>repository.terradue.com-releases</name>
+			<url>http://repository.terradue.com/artifactory/libs-release-public</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<extensions>
