@@ -7,7 +7,7 @@
 	<artifactId>beam-java-app</artifactId>
 	<packaging>rpm</packaging>
 	<description>BEAM Java FLH Processing</description>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<scm>
 		<connection>scm:git:git@github.com:Terradue/BEAM-Java-tutorial.git</connection>
@@ -23,10 +23,10 @@
 			<version>5.0</version>
 		</dependency>
 		<dependency>
-                        <groupId>org.esa.beam</groupId>
-                        <artifactId>beam-envisat-reader</artifactId>
-                        <version>5.0</version>
-                </dependency>
+			<groupId>org.esa.beam</groupId>
+			<artifactId>beam-envisat-reader</artifactId>
+			<version>5.0</version>
+		</dependency>
 		<dependency>
 			<groupId>ncsa.hdf</groupId>
 			<artifactId>lib-hdf</artifactId>
@@ -70,10 +70,11 @@
 			<url>http://download.osgeo.org/webdav/geotools/</url>
 		</repository>
 		<repository>
-			<id>jabylon</id>
-			<name>jabylon</name>
-			<url>scp://web.jabylon.org:23/srv/sites/jabylon/maven</url>
+			<id>repository.terradue.com</id>
+			<name>repository.terradue.com-releases</name>
+			<url>http://repository.terradue.com/artifactory/libs-release-public</url>
 		</repository>
+
 	</repositories>
 
 	<build>
@@ -325,6 +326,8 @@
 						<configuration>
 							<releaseName>v${project.version}</releaseName>
 							<tag>v${project.version}</tag>
+							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${DYNAMIC.CBUILDPROP.RPM.VERSION}-${DYNAMIC.CBUILDPROP.RPM.RELEASE}.${DYNAMIC.CBUILDPROP.OS}.noarch.rpm</artifact>
+							<overwriteArtifact>true</overwriteArtifact>
 						</configuration>
 					</execution>
 				</executions>
@@ -332,27 +335,6 @@
 
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>de.jutzig</groupId>
-							<artifactId>github-release-plugin</artifactId>
-							<version>1.0.3</version>
-							<configuration>
-								<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${DYNAMIC.CBUILDPROP.RPM.VERSION}-${DYNAMIC.CBUILDPROP.RPM.RELEASE}.${DYNAMIC.CBUILDPROP.OS}.noarch.rpm</artifact>
-								<overwriteArtifact>true</overwriteArtifact>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
 
 </project>
 
