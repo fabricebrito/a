@@ -242,6 +242,7 @@
 					<defaultGroupname>ciop</defaultGroupname>
 					<prefix>/application</prefix>
 					<autoRequires>true</autoRequires>
+					<release></release>
 					<mappings>
 						<mapping>
 							<directory>/application</directory>
@@ -339,7 +340,7 @@
 						<configuration>
 							<releaseName>v${project.version}</releaseName>
 							<tag>v${project.version}</tag>
-							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${DYNAMIC.CBUILDPROP.RPM.VERSION}-${DYNAMIC.CBUILDPROP.RPM.RELEASE}.${DYNAMIC.CBUILDPROP.OS}.noarch.rpm</artifact>
+							<artifact>${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch/${project.artifactId}-${project.version}.noarch.rpm</artifact>
 							<overwriteArtifact>true</overwriteArtifact>
 						</configuration>
 					</execution>
