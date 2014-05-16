@@ -50,7 +50,7 @@ do
 	# - the operator FLH
 	# - the MERIS local path (copied from the archive with ciop-copy)
 	# the script gpt.sh applies the operator to the input product, compress the result (.tgz) and will write it to the $OUTPUTDIR 
-	$_CIOP_APPLICATION_PATH/shared/bin/gpt.sh FLH -SsourceProduct=$retrieved -f GeoTIFF  -t $OUTPUTDIR/`basename $retrieved`/result.dim 1>&2 
+	$_CIOP_APPLICATION_PATH/shared/bin/gpt.sh FLH -SsourceProduct=$retrieved -f GeoTIFF  -t $OUTPUTDIR/`basename $retrieved`/result.tif 1>&2 
 
 	# check the exit code
 	[ "$?" != "0" ] && exit $ERR_BEAM 
