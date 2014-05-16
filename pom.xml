@@ -73,6 +73,10 @@
 			<id>repository.terradue.com</id>
 			<name>repository.terradue.com-releases</name>
 			<url>http://repository.terradue.com/artifactory/libs-release-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
 		</repository>
 
 	</repositories>
