@@ -9,6 +9,7 @@
 					type="opensearch" target="time:start" id="startdate" />
 				<parameter scope="runtime" title="Stop date" abstract="Stop date of the TOI"
 					type="opensearch" target="time:end" id="enddate" />
+				<parameter id="format">GeoTIFF</parameter>
 			</defaultParameters>
 			<defaultJobconf>
 				<property id="mapred.task.timeout">9900000000000</property>
