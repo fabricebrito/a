@@ -64,7 +64,7 @@ do
 	# publish the result 
 	# ciop-publish copies the beam_expr.sh result to a distributed filesystem
 	ciop-log "INFO" "Publishing result"	
-	ciop-publish $OUTPUTDIR/`basename $retrieved`
+	ciop-publish -m $OUTPUTDIR/`basename $retrieved`
 	
 	# cleanup. Free the local directory space by deleting the input MERIS Level 1 product (copied with ciop-copy) and 
 	# the result of the gpt FLH operator execution (the compressed archive in $OUTPUTDIR)

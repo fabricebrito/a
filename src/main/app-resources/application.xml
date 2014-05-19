@@ -25,8 +25,8 @@
 				<source refid="cas:series">http://catalogue.terradue.int/catalogue/search/MER_RR__1P/description</source>
 			</sources>
 			<parameters>
-				<parameter type="opensearch" target="time:start" id="startdate">2012-04-02</parameter>
-				<parameter type="opensearch" target="time:end" id="enddate">2012-04-06</parameter>
+				<parameter type="opensearch" target="time:start" id="startdate">2012-04-04T00:00:00</parameter>
+				<parameter type="opensearch" target="time:end" id="enddate">2012-04-04:23:59:59</parameter>
 			</parameters>
 		</node>
 	</workflow>
