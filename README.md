@@ -2,6 +2,8 @@
 
 The BEAM Java tutorial uses the Developer Cloud Sandbox service to implement a BEAM Operator to calculate the Fluorescence line height in Envisat MERIS Level 1b products.
 
+This tutorial builds upon the BEAM tutorial held at the Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop 2012 done by [Brockmann Consult](http://www.brockmann-consult.de) and extends it to exploit a Cloud computing platform for its development, test and exploitation.
+
 ### Getting Started 
 
 To run this application, you will need a Developer Cloud Sandbox that can be either requested from the ESA research & service support Portal (http://eogrid.esrin.esa.int/cloudtoolbox/) for ESA G-POD related projects and ESA registered user accounts, or directly from Terradue's Portal (http://www.terradue.com/partners), provided user registration approval. 
