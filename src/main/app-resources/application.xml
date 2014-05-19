@@ -5,11 +5,11 @@
 		<jobTemplate id="flh-proc">
 			<streamingExecutable>/application/flh-proc/run.sh</streamingExecutable>
 			<defaultParameters>
-				<parameter scope="runtime" title="Start date" abstract="Start date of the TOI"
+				<parameter scope="runtime" title="Start date" abstract="Start date of the TOI (e.g. 2012-04-04T00:00:00)"
 					type="opensearch" target="time:start" id="startdate" />
-				<parameter scope="runtime" title="Stop date" abstract="Stop date of the TOI"
+				<parameter scope="runtime" title="Stop date" abstract="Stop date of the TOI (e.g. 2012-04-04T23:59:59)"
 					type="opensearch" target="time:end" id="enddate" />
-				<parameter id="format">GeoTIFF</parameter>
+				<parameter id="format" scope="runtime" title="Format" abstract="Format for the ouput products (BEAM-DIMAP or GeoTIFF)">GeoTIFF</parameter>
 			</defaultParameters>
 			<defaultJobconf>
 				<property id="mapred.task.timeout">9900000000000</property>
