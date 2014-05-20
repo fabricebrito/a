@@ -1,4 +1,4 @@
-## BEAM-Java-tutorial
+## Developer Cloud Service - BEAM Java tutorial
 
 The BEAM Java tutorial uses the Developer Cloud Sandbox service to implement a BEAM Operator to calculate the Fluorescence line height in Envisat MERIS Level 1b products.
 
