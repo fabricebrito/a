@@ -6,7 +6,7 @@ This tutorial builds upon the BEAM tutorial created by [Brockmann Consult](http:
 
 ### Getting Started 
 
-To run this application, you will need a Developer Cloud Sandbox that can be either requested from the ESA research & service support Portal (http://eogrid.esrin.esa.int/cloudtoolbox/) for ESA G-POD related projects and ESA registered user accounts, or directly from Terradue's Portal (http://www.terradue.com/partners), provided user registration approval. 
+To run this application, you will need a Developer Cloud Sandbox that can be either requested from the ESA [Research & Service Support Portal](http://eogrid.esrin.esa.int/cloudtoolbox/) for ESA G-POD related projects and ESA registered user accounts, or directly from Terradue's [Portal](http://www.terradue.com/partners), provided user registration approval. 
 
 A Developer Cloud Sandbox provides Earth Science data access services, and assistance tools for a user to implement, test and validate his application.
 It runs in two different lifecycle modes: Sandbox mode and Cluster mode. 
@@ -33,7 +33,10 @@ ciop-simwf
 
 ### Community and Documentation
 
-To learn more and find information about the Developer Cloud Sandbox service and the BEAM Java tutorial go to: http://docs.terradue.com/developer and http://docs.terradue.com/developer/field/ocean_color/lib_beam_flh
+To learn more and find information go to 
+
+* [Developer Cloud Sandbox](http://docs.terradue.com/developer) service 
+* [BEAM Java tutorial](http://docs.terradue.com/developer/field/ocean_color/lib_beam_flh) 
 
 ### Authors (alphabetically)
 
