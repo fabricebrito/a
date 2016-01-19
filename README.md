@@ -28,7 +28,7 @@ mvn install
 Run this command in a shell:
 
 ```bash
-ciop-simwf
+ciop-run
 ```
 
 ### Community and Documentation
@@ -45,6 +45,6 @@ To learn more and find information go to
 
 ### License
 
-Copyright 2014 Terradue Srl
+Copyright 2016 Terradue Srl
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
