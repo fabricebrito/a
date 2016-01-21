@@ -18,8 +18,8 @@ Log on the developer sandbox and run these commands in a shell:
 
 ```bash
 cd
-git clone git@github.com:Terradue/BEAM-Java-tutorial.git
-cd BEAM-Java-tutorial
+git clone https://github.com/Terradue/dcs-beam-flh-java.git
+cd dcs-beam-flh-java
 mvn install
 ```
 
